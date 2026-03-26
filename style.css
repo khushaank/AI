@@ -1,0 +1,362 @@
+:root {
+  --bg-color: #050505;
+  --text-color: #ffffff;
+  --accent-red: #ff1010;
+  --accent-orange: #f81d09;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --font-main: "Outfit", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+/* Background Art */
+.art-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 80vh;
+  z-index: -1;
+  opacity: 0.6;
+  pointer-events: none;
+  filter: blur(
+    40px
+  ); /* Soften the SVG to make it more abstract/gradient-like per request */
+  animation: pulseArt 10s infinite alternate;
+}
+
+#img-svg {
+  width: 100%;
+  height: 100%;
+  /* Use the gradient colors requested */
+  fill: url(#gradient);
+}
+
+/* Add a global gradient overlay to match "radints" request */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(221, 120, 120, 0.15) 0%,
+    rgba(5, 5, 5, 1) 60%
+  );
+  z-index: -2;
+  animation: rotateGradient 20s linear infinite;
+}
+
+@keyframes pulseArt {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Layout */
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.clean-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.settings-btn:hover {
+  color: #fff;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.main-title {
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  background: linear-gradient(to right, #fff, #aaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+/* Input Card */
+.input-container {
+  width: 100%;
+  position: relative;
+}
+
+.glass-card {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Minimal border */
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+textarea#goal {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 500;
+  resize: none;
+  height: 3rem; /* Compact until typed in */
+  width: 100%;
+}
+textarea#goal:focus {
+  outline: none;
+}
+textarea#goal::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.secondary-inputs {
+  display: flex;
+  gap: 1rem;
+}
+
+#skills,
+#time,
+.context-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.context-input {
+  resize: none;
+  height: 3rem;
+}
+
+#skills:focus,
+#time:focus,
+.context-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.action-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.generate-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.generate-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* API Settings Popup */
+.api-popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 100;
+  width: 300px;
+}
+
+.api-popup input {
+  background: #000;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.api-popup button {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Output Area */
+.output-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  overflow-y: auto;
+  border-radius: 20px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.markdown-body {
+  flex: 1;
+  max-width: 100%;
+}
+.markdown-body h1,
+.markdown-body h2 {
+  color: #fff;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+.markdown-body p,
+.markdown-body li {
+  color: #ddd;
+  line-height: 1.6;
+}
+.markdown-body strong {
+  color: #fff;
+}
+
+.close-btn {
+  align-self: flex-end;
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.close-btn:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #000;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+  .secondary-inputs {
+    flex-direction: column;
+  }
+}
